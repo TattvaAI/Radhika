@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-ink: #0E1020;
+  --color-ink-raised: #161A2E;
+  --color-ink-line: #2A3050;
+  --color-paper: #F2EDE3;
+  --color-madder: #A63A2B;
+  --color-turmeric: #D9A441;
+  --color-jade: #2F6B5A;
+
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-line: var(--line);
+
+  --font-serif: var(--font-display), "Noto Serif Devanagari", serif;
+  --font-sans: var(--font-body), "IBM Plex Sans Devanagari", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: light dark;
+    --surface: #0E1020;
+    --surface-raised: #161A2E;
+    --text-primary: #F2EDE3;
+    --text-muted: #A3A8BC;
+    --line: #2A3050;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --surface: #F2EDE3;
+      --surface-raised: #E8E1D5;
+      --text-primary: #0E1020;
+      --text-muted: #535870;
+      --line: #D5CEBF;
+    }
+  }
+
+  html {
+    color-scheme: light dark;
+    line-height: 1.5;
+  }
+
+  body {
+    background-color: var(--surface);
+    background-image: radial-gradient(circle at 50% 0%, rgba(217, 164, 65, 0.06) 0%, transparent 60%),
+      radial-gradient(circle at 100% 50%, rgba(42, 48, 80, 0.25) 0%, transparent 50%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: rgba(217, 164, 65, 0.25);
+    color: var(--color-paper, #F2EDE3);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-turmeric, #D9A441);
+    outline-offset: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
